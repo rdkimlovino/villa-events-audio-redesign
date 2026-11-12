@@ -1,0 +1,18 @@
+name: Rename site file to index.html
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename site file to index.html
+        run: |
+          git mv villa-events-audio-redesign.html index.html
+          git rm .github/workflows/rename-to-index.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Rename site file to index.html"
+          git push
